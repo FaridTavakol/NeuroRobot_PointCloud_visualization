@@ -1,0 +1,1 @@
+/usr/bin/c++    -ftemplate-depth-50 -fno-tree-vectorize    -lpthread -rdynamic CMakeFiles/point_server.dir/point_server.cpp.o  -o point_server  -lOpenIGTLink 
