@@ -5,6 +5,7 @@ CMakeFiles/string_client.dir/string_client.cpp.o: ../string_client.cpp
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlClientSocket.h
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlConfigure.h
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlCreateObjectFunction.h
+CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlImageMessage.h
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlLightObject.h
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlMacro.h
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlMath.h
@@ -14,6 +15,7 @@ CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlO
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlObject.h
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlObjectFactory.h
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlObjectFactoryBase.h
+CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlPointMessage.h
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlSimpleFastMutexLock.h
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlSmartPointer.h
 CMakeFiles/string_client.dir/string_client.cpp.o: /usr/include/openigtlink/igtlSocket.h

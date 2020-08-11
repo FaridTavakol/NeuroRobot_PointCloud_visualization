@@ -6,6 +6,7 @@ CMakeFiles/string_server.dir/string_server.cpp.o
  /usr/include/openigtlink/igtlClientSocket.h
  /usr/include/openigtlink/igtlConfigure.h
  /usr/include/openigtlink/igtlCreateObjectFunction.h
+ /usr/include/openigtlink/igtlImageMessage.h
  /usr/include/openigtlink/igtlLightObject.h
  /usr/include/openigtlink/igtlMacro.h
  /usr/include/openigtlink/igtlMath.h
@@ -15,6 +16,7 @@ CMakeFiles/string_server.dir/string_server.cpp.o
  /usr/include/openigtlink/igtlObject.h
  /usr/include/openigtlink/igtlObjectFactory.h
  /usr/include/openigtlink/igtlObjectFactoryBase.h
+ /usr/include/openigtlink/igtlPointMessage.h
  /usr/include/openigtlink/igtlServerSocket.h
  /usr/include/openigtlink/igtlSimpleFastMutexLock.h
  /usr/include/openigtlink/igtlSmartPointer.h

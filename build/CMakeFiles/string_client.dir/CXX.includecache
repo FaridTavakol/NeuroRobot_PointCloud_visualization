@@ -7,6 +7,8 @@
 #IncludeRegexTransform: 
 
 /home/aimlab/Documents/NRI_Project/IGTlink_test/string_client.cpp
+igtlPointMessage.h
+/home/aimlab/Documents/NRI_Project/IGTlink_test/igtlPointMessage.h
 iostream
 -
 iomanip
@@ -37,6 +39,16 @@ igtlWin32Header.h
 /usr/include/openigtlink/igtlCreateObjectFunction.h
 igtlObject.h
 /usr/include/openigtlink/igtlObject.h
+
+/usr/include/openigtlink/igtlImageMessage.h
+igtlObject.h
+/usr/include/openigtlink/igtlObject.h
+igtlMacro.h
+/usr/include/openigtlink/igtlMacro.h
+igtlMath.h
+/usr/include/openigtlink/igtlMath.h
+igtlMessageBase.h
+/usr/include/openigtlink/igtlMessageBase.h
 
 /usr/include/openigtlink/igtlLightObject.h
 igtlSmartPointer.h
@@ -115,6 +127,22 @@ list
 -
 vector
 -
+
+/usr/include/openigtlink/igtlPointMessage.h
+vector
+-
+string
+-
+igtlObject.h
+/usr/include/openigtlink/igtlObject.h
+igtlMath.h
+/usr/include/openigtlink/igtlMath.h
+igtlMessageBase.h
+/usr/include/openigtlink/igtlMessageBase.h
+igtlTypes.h
+/usr/include/openigtlink/igtlTypes.h
+igtlImageMessage.h
+/usr/include/openigtlink/igtlImageMessage.h
 
 /usr/include/openigtlink/igtlSimpleFastMutexLock.h
 igtlMacro.h

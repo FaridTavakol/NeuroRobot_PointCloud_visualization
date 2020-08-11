@@ -10,7 +10,8 @@
   PURPOSE.  See the above copyright notices for more information.
 
 =========================================================================*/
-
+//client is supposed to be the 3D slicer
+#include "igtlPointMessage.h"
 #include <iostream>
 #include <iomanip>
 #include <math.h>
@@ -21,20 +22,12 @@
 #include "igtlMessageHeader.h"
 #include "igtlClientSocket.h"
 #include "igtlStringMessage.h"
-#define N_STRINGS 5
 
-const char *testString[N_STRINGS] = {
-    "OpenIGTLink",
-    "Network",
-    "Communication",
-    "Protocol",
-    "Image Guided Therapy",
-};
-#define N 1
-const char *prompts[N] = {
-    "Enter your message to the client",
-};
+#define N_elements 1
+const char *request[N_elements] = {"send_point"};
+
 int ReceiveString(igtl::Socket *socket, igtl::MessageHeader::Pointer &header);
+int ReceivePoint(igtl::Socket *socket, igtl::MessageHeader::Pointer &header);
 
 int main(int argc, char *argv[])
 {
@@ -80,14 +73,12 @@ int main(int argc, char *argv[])
     stringMsg = igtl::StringMessage::New();
     while (1)
     {
-        if (counter < 5)
+        if (counter == 0)
         {
             // Initialize receive buffer
             headerMsg->InitPack();
             // Receive generic header from the socket
             int r = socket->Receive(headerMsg->GetPackPointer(), headerMsg->GetPackSize());
-            std::cout << "Im here";
-
             if (r == 0) //if no data is being sent from the server
             {
                 socket->CloseSocket();
@@ -95,9 +86,6 @@ int main(int argc, char *argv[])
             }
             if (r != headerMsg->GetPackSize())
             {
-                b++;
-                std::cout << "\n still r is not equal to pack size!\n"
-                          << "b is :" << b;
                 continue;
             }
 
@@ -128,32 +116,67 @@ int main(int argc, char *argv[])
                 socket->Skip(headerMsg->GetBodySizeToRead(), 0);
             }
             std::cout << "\n receiving the next string\n";
+
+            counter++;
         }
-        else if (counter >= 5 && counter < 6) // now we are sending data to the server
+        if (counter == 1) // second stage of (sending request to the server)
         {
-            for (int i = 0; i < 5; i++)
-            {
-                stringMsg->SetDeviceName("StringMessage");
-                std::cout << "Sending string: " << testString[i] << std::endl;
-                stringMsg->SetString(testString[i]);
-                stringMsg->Pack();
-                socket->Send(stringMsg->GetPackPointer(), stringMsg->GetPackSize());
-                igtl::Sleep(1000); // wait
-                i = (i + 1) % N_STRINGS;
-            }
-            //
-            // after sending all 5 strings to the server
-        }
-        if (counter == 6)
-        {
+
             stringMsg->SetDeviceName("StringMessage");
-            std::cout << "Sending string: " << prompts[0] << std::endl;
-            stringMsg->SetString(prompts[0]);
+            std::cout << "Sending string: " << request[0] << std::endl;
+            stringMsg->SetString(request[0]);
             stringMsg->Pack();
             socket->Send(stringMsg->GetPackPointer(), stringMsg->GetPackSize());
-            igtl::Sleep(1000);
+            igtl::Sleep(1000); // wait
+
+            //waiting for reply from the server
+            while (1)
+            {
+                std::cout << "waiting for a reply from the server!" << std::endl;
+                headerMsg->InitPack();
+                int r = socket->Receive(headerMsg->GetPackPointer(), headerMsg->GetPackSize());
+
+                if (r == 0 || r < 0)
+                {
+                    continue;
+                }
+                headerMsg->Unpack();
+                // Get time stamp
+                igtlUint32 sec;
+                igtlUint32 nanosec;
+
+                headerMsg->GetTimeStamp(ts);
+                ts->GetTimeStamp(&sec, &nanosec);
+
+                std::cerr << "Name: " << headerMsg->GetDeviceName() << std::endl;
+                std::cerr << "Time stamp: "
+                          << sec << "." << std::setw(9) << std::setfill('0')
+                          << nanosec << std::endl;
+
+                // Check data type and receive data body
+
+                if (strcmp(headerMsg->GetDeviceType(), "STRING") == 0)
+                {
+                    ReceiveString(socket, headerMsg);
+                    break;
+                }
+                else if (strcmp(headerMsg->GetDeviceType(), "POINT") == 0)
+                {
+                    ReceivePoint(socket, headerMsg);
+                    break;
+                }
+            }
+
+            counter++;
         }
-        counter++;
+        if (counter > 1)
+        {
+            while (1)
+            {
+                std::cerr << "In the while loop!" << std::endl;
+                igtl::Sleep(1000); // wait
+            }
+        }
     }
 
     //------------------------------------------------------------
@@ -161,7 +184,7 @@ int main(int argc, char *argv[])
 
     socket->CloseSocket();
 }
-
+//======================================================================================
 int ReceiveString(igtl::Socket *socket, igtl::MessageHeader::Pointer &header)
 {
 
@@ -185,6 +208,52 @@ int ReceiveString(igtl::Socket *socket, igtl::MessageHeader::Pointer &header)
         std::cerr << "Encoding: " << stringMsg->GetEncoding() << "; "
                   << "String: " << stringMsg->GetString() << std::endl
                   << std::endl;
+    }
+
+    return 1;
+}
+int ReceivePoint(igtl::Socket *socket, igtl::MessageHeader::Pointer &header)
+{
+
+    std::cerr << "Receiving POINT data type." << std::endl;
+
+    // Create a message buffer to receive transform data
+    igtl::PointMessage::Pointer pointMsg;
+    pointMsg = igtl::PointMessage::New();
+    pointMsg->SetMessageHeader(header);
+    pointMsg->AllocatePack();
+
+    // Receive transform data from the socket
+    socket->Receive(pointMsg->GetPackBodyPointer(), pointMsg->GetPackBodySize());
+
+    // Deserialize the transform data
+    // If you want to skip CRC check, call Unpack() without argument.
+    int c = pointMsg->Unpack(1);
+
+    if (c & igtl::MessageHeader::UNPACK_BODY) // if CRC check is OK
+    {
+        int nElements = pointMsg->GetNumberOfPointElement();
+        for (int i = 0; i < nElements; i++)
+        {
+            igtl::PointElement::Pointer pointElement;
+            pointMsg->GetPointElement(i, pointElement);
+
+            igtlUint8 rgba[4];
+            pointElement->GetRGBA(rgba);
+
+            igtlFloat32 pos[3];
+            pointElement->GetPosition(pos);
+
+            std::cerr << "========== Element #" << i << " ==========" << std::endl;
+            std::cerr << " Name      : " << pointElement->GetName() << std::endl;
+            std::cerr << " GroupName : " << pointElement->GetGroupName() << std::endl;
+            std::cerr << " RGBA      : ( " << (int)rgba[0] << ", " << (int)rgba[1] << ", " << (int)rgba[2] << ", " << (int)rgba[3] << " )" << std::endl;
+            std::cerr << " Position  : ( " << std::fixed << pos[0] << ", " << pos[1] << ", " << pos[2] << " )" << std::endl;
+            std::cerr << " Radius    : " << std::fixed << pointElement->GetRadius() << std::endl;
+            std::cerr << " Owner     : " << pointElement->GetOwner() << std::endl;
+            std::cerr << "================================" << std::endl
+                      << std::endl;
+        }
     }
 
     return 1;
