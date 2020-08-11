@@ -1,4 +1,4 @@
 /home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles/rebuild_cache.dir
 /home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles/edit_cache.dir
-/home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles/point_client.dir
-/home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles/point_server.dir
+/home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles/string_server.dir
+/home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles/string_client.dir

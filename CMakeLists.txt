@@ -9,8 +9,14 @@ find_package(OpenIGTLink REQUIRED)
 
 include(${OpenIGTLink_USE_FILE})
 
-ADD_EXECUTABLE(point_server   point_server.cpp)
-TARGET_LINK_LIBRARIES(point_server OpenIGTLink)
+# ADD_EXECUTABLE(point_server   point_server.cpp)
+# TARGET_LINK_LIBRARIES(point_server OpenIGTLink)
 
-ADD_EXECUTABLE(point_client   point_client.cpp)
-TARGET_LINK_LIBRARIES(point_client OpenIGTLink)
+# ADD_EXECUTABLE(point_client   point_client.cpp)
+# TARGET_LINK_LIBRARIES(point_client OpenIGTLink)
+
+ADD_EXECUTABLE(string_client   string_client.cpp)
+TARGET_LINK_LIBRARIES(string_client OpenIGTLink)
+
+ADD_EXECUTABLE(string_server   string_server.cpp)
+TARGET_LINK_LIBRARIES(string_server OpenIGTLink)

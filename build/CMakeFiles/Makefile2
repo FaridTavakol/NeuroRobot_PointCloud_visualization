@@ -73,8 +73,8 @@ CMAKE_BINARY_DIR = /home/aimlab/Documents/NRI_Project/IGTlink_test/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/point_client.dir/all
-all: CMakeFiles/point_server.dir/all
+all: CMakeFiles/string_server.dir/all
+all: CMakeFiles/string_client.dir/all
 
 .PHONY : all
 
@@ -84,64 +84,64 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/point_client.dir/clean
-clean: CMakeFiles/point_server.dir/clean
+clean: CMakeFiles/string_server.dir/clean
+clean: CMakeFiles/string_client.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/point_client.dir
+# Target rules for target CMakeFiles/string_server.dir
 
 # All Build rule for target.
-CMakeFiles/point_client.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_client.dir/build.make CMakeFiles/point_client.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_client.dir/build.make CMakeFiles/point_client.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles --progress-num=1,2 "Built target point_client"
-.PHONY : CMakeFiles/point_client.dir/all
+CMakeFiles/string_server.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_server.dir/build.make CMakeFiles/string_server.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_server.dir/build.make CMakeFiles/string_server.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles --progress-num=3,4 "Built target string_server"
+.PHONY : CMakeFiles/string_server.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/point_client.dir/rule: cmake_check_build_system
+CMakeFiles/string_server.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/point_client.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/string_server.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles 0
-.PHONY : CMakeFiles/point_client.dir/rule
+.PHONY : CMakeFiles/string_server.dir/rule
 
 # Convenience name for target.
-point_client: CMakeFiles/point_client.dir/rule
+string_server: CMakeFiles/string_server.dir/rule
 
-.PHONY : point_client
+.PHONY : string_server
 
 # clean rule for target.
-CMakeFiles/point_client.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_client.dir/build.make CMakeFiles/point_client.dir/clean
-.PHONY : CMakeFiles/point_client.dir/clean
+CMakeFiles/string_server.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_server.dir/build.make CMakeFiles/string_server.dir/clean
+.PHONY : CMakeFiles/string_server.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/point_server.dir
+# Target rules for target CMakeFiles/string_client.dir
 
 # All Build rule for target.
-CMakeFiles/point_server.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_server.dir/build.make CMakeFiles/point_server.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_server.dir/build.make CMakeFiles/point_server.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles --progress-num=3,4 "Built target point_server"
-.PHONY : CMakeFiles/point_server.dir/all
+CMakeFiles/string_client.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_client.dir/build.make CMakeFiles/string_client.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_client.dir/build.make CMakeFiles/string_client.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles --progress-num=1,2 "Built target string_client"
+.PHONY : CMakeFiles/string_client.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/point_server.dir/rule: cmake_check_build_system
+CMakeFiles/string_client.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/point_server.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/string_client.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/aimlab/Documents/NRI_Project/IGTlink_test/build/CMakeFiles 0
-.PHONY : CMakeFiles/point_server.dir/rule
+.PHONY : CMakeFiles/string_client.dir/rule
 
 # Convenience name for target.
-point_server: CMakeFiles/point_server.dir/rule
+string_client: CMakeFiles/string_client.dir/rule
 
-.PHONY : point_server
+.PHONY : string_client
 
 # clean rule for target.
-CMakeFiles/point_server.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_server.dir/build.make CMakeFiles/point_server.dir/clean
-.PHONY : CMakeFiles/point_server.dir/clean
+CMakeFiles/string_client.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_client.dir/build.make CMakeFiles/string_client.dir/clean
+.PHONY : CMakeFiles/string_client.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

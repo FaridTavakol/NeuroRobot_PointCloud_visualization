@@ -1,0 +1,1 @@
+/usr/bin/c++    -ftemplate-depth-50 -fno-tree-vectorize    -lpthread -rdynamic CMakeFiles/string_server.dir/string_server.cpp.o  -o string_server  -lOpenIGTLink 

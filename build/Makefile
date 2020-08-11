@@ -131,84 +131,84 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named point_client
+# Target rules for targets named string_server
 
 # Build rule for target.
-point_client: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 point_client
-.PHONY : point_client
+string_server: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 string_server
+.PHONY : string_server
 
 # fast build rule for target.
-point_client/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_client.dir/build.make CMakeFiles/point_client.dir/build
-.PHONY : point_client/fast
+string_server/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_server.dir/build.make CMakeFiles/string_server.dir/build
+.PHONY : string_server/fast
 
 #=============================================================================
-# Target rules for targets named point_server
+# Target rules for targets named string_client
 
 # Build rule for target.
-point_server: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 point_server
-.PHONY : point_server
+string_client: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 string_client
+.PHONY : string_client
 
 # fast build rule for target.
-point_server/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_server.dir/build.make CMakeFiles/point_server.dir/build
-.PHONY : point_server/fast
+string_client/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_client.dir/build.make CMakeFiles/string_client.dir/build
+.PHONY : string_client/fast
 
-point_client.o: point_client.cpp.o
+string_client.o: string_client.cpp.o
 
-.PHONY : point_client.o
-
-# target to build an object file
-point_client.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_client.dir/build.make CMakeFiles/point_client.dir/point_client.cpp.o
-.PHONY : point_client.cpp.o
-
-point_client.i: point_client.cpp.i
-
-.PHONY : point_client.i
-
-# target to preprocess a source file
-point_client.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_client.dir/build.make CMakeFiles/point_client.dir/point_client.cpp.i
-.PHONY : point_client.cpp.i
-
-point_client.s: point_client.cpp.s
-
-.PHONY : point_client.s
-
-# target to generate assembly for a file
-point_client.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_client.dir/build.make CMakeFiles/point_client.dir/point_client.cpp.s
-.PHONY : point_client.cpp.s
-
-point_server.o: point_server.cpp.o
-
-.PHONY : point_server.o
+.PHONY : string_client.o
 
 # target to build an object file
-point_server.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_server.dir/build.make CMakeFiles/point_server.dir/point_server.cpp.o
-.PHONY : point_server.cpp.o
+string_client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_client.dir/build.make CMakeFiles/string_client.dir/string_client.cpp.o
+.PHONY : string_client.cpp.o
 
-point_server.i: point_server.cpp.i
+string_client.i: string_client.cpp.i
 
-.PHONY : point_server.i
+.PHONY : string_client.i
 
 # target to preprocess a source file
-point_server.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_server.dir/build.make CMakeFiles/point_server.dir/point_server.cpp.i
-.PHONY : point_server.cpp.i
+string_client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_client.dir/build.make CMakeFiles/string_client.dir/string_client.cpp.i
+.PHONY : string_client.cpp.i
 
-point_server.s: point_server.cpp.s
+string_client.s: string_client.cpp.s
 
-.PHONY : point_server.s
+.PHONY : string_client.s
 
 # target to generate assembly for a file
-point_server.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/point_server.dir/build.make CMakeFiles/point_server.dir/point_server.cpp.s
-.PHONY : point_server.cpp.s
+string_client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_client.dir/build.make CMakeFiles/string_client.dir/string_client.cpp.s
+.PHONY : string_client.cpp.s
+
+string_server.o: string_server.cpp.o
+
+.PHONY : string_server.o
+
+# target to build an object file
+string_server.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_server.dir/build.make CMakeFiles/string_server.dir/string_server.cpp.o
+.PHONY : string_server.cpp.o
+
+string_server.i: string_server.cpp.i
+
+.PHONY : string_server.i
+
+# target to preprocess a source file
+string_server.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_server.dir/build.make CMakeFiles/string_server.dir/string_server.cpp.i
+.PHONY : string_server.cpp.i
+
+string_server.s: string_server.cpp.s
+
+.PHONY : string_server.s
+
+# target to generate assembly for a file
+string_server.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/string_server.dir/build.make CMakeFiles/string_server.dir/string_server.cpp.s
+.PHONY : string_server.cpp.s
 
 # Help Target
 help:
@@ -218,14 +218,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... point_client"
-	@echo "... point_server"
-	@echo "... point_client.o"
-	@echo "... point_client.i"
-	@echo "... point_client.s"
-	@echo "... point_server.o"
-	@echo "... point_server.i"
-	@echo "... point_server.s"
+	@echo "... string_client"
+	@echo "... string_server"
+	@echo "... string_client.o"
+	@echo "... string_client.i"
+	@echo "... string_client.s"
+	@echo "... string_server.o"
+	@echo "... string_server.i"
+	@echo "... string_server.s"
 .PHONY : help
 
 

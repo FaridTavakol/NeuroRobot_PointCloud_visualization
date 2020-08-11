@@ -8,9 +8,11 @@
 #include "igtlOSUtil.h"
 #include "igtlPointMessage.h"
 #include "igtlClientSocket.h"
+#include "igtlStringMessage.h"
 
 int ReceivePoint(igtl::Socket *socket, igtl::MessageHeader *header);
 int ReceivePosition(igtl::Socket *socket, igtl::MessageHeader *header);
+int ReceiveString(igtl::Socket *socket, igtl::MessageHeader::Pointer &header);
 
 int main(int argc, char *argv[])
 {
@@ -52,51 +54,55 @@ int main(int argc, char *argv[])
     //Allocate a timestamp
     igtl::TimeStamp::Pointer ts;
     ts = igtl::TimeStamp::New();
-
-    // while (1)
-    // {
-    //loop
-    for (int i = 0; i < 1; i++)
+    while (1)
     {
-        //initialize receive buffer
-        headerMsg->InitPack();
-        //receive generic header from the socket
-        int r = socket->Receive(headerMsg->GetPackPointer(), headerMsg->GetPackSize());
-        if (r == 0)
-        {
-            std::cerr << "Error has occured " << std::endl;
-            socket->CloseSocket();
-        }
-        if (r != headerMsg->GetPackSize())
-        {
-            continue;
-        }
 
-        // deserialize the header
-        headerMsg->Unpack();
+        //loop
+        for (int i = 0; i < 1; i++)
+        {
+            //initialize receive buffer
+            headerMsg->InitPack();
+            //receive generic header from the socket
+            int r = socket->Receive(headerMsg->GetPackPointer(), headerMsg->GetPackSize());
+            if (r == 0)
+            {
+                std::cerr << "Error has occured!" << std::endl;
+                socket->CloseSocket();
+            }
+            if (r != headerMsg->GetPackSize())
+            {
+                continue;
+            }
 
-        // Get time stamp
-        igtlUint32 sec;
-        igtlUint32 nanosec;
-        headerMsg->GetTimeStamp(ts);
-        ts->GetTimeStamp(&sec, &nanosec);
-        std::cerr << "Time stamp: "
-                  << sec << "." << std::setw(9) << std::setfill('0')
-                  << nanosec << std::endl;
-        // check data type of the received message
-        if (strcmp(headerMsg->GetDeviceType(), "POINT") == 0)
-        {
-            ReceivePoint(socket, headerMsg);
-        }
-        else
-        {
-            //if data type is unknown skip reading.
-            std::cerr << "receiving : " << headerMsg->GetDeviceType() << std::endl;
-            std::cerr << "Size : " << headerMsg->GetBodySizeToRead() << std::endl;
-            socket->Skip(headerMsg->GetBodySizeToRead(), 0);
+            // deserialize the header
+            headerMsg->Unpack();
+
+            // Get time stamp
+            igtlUint32 sec;
+            igtlUint32 nanosec;
+            headerMsg->GetTimeStamp(ts);
+            ts->GetTimeStamp(&sec, &nanosec);
+            std::cerr << "Time stamp: "
+                      << sec << "." << std::setw(9) << std::setfill('0')
+                      << nanosec << std::endl;
+            // check data type of the received message
+            if (strcmp(headerMsg->GetDeviceType(), "POINT") == 0)
+            {
+                ReceivePoint(socket, headerMsg);
+            }
+            else if (strcmp(headerMsg->GetDeviceType(), "STRING") == 0)
+            {
+                ReceiveString(socket, headerMsg);
+            }
+            else
+            {
+                //if data type is unknown skip reading.
+                std::cerr << "receiving : " << headerMsg->GetDeviceType() << std::endl;
+                std::cerr << "Size : " << headerMsg->GetBodySizeToRead() << std::endl;
+                socket->Skip(headerMsg->GetBodySizeToRead(), 0);
+            }
         }
     }
-    // }
     socket->CloseSocket();
 }
 
@@ -141,6 +147,33 @@ int ReceivePoint(igtl::Socket *socket, igtl::MessageHeader *header)
             std::cerr << " Owner     : " << pointElement->GetOwner() << std::endl;
             std::cerr << "================================" << std::endl;
         }
+    }
+
+    return 1;
+}
+int ReceiveString(igtl::Socket *socket, igtl::MessageHeader::Pointer &header)
+{
+
+    std::cerr << "Receiving STRING data type." << std::endl;
+
+    // Create a message buffer to receive transform data
+    igtl::StringMessage::Pointer stringMsg;
+    stringMsg = igtl::StringMessage::New();
+    stringMsg->SetMessageHeader(header);
+    stringMsg->AllocatePack();
+
+    // Receive transform data from the socket
+    socket->Receive(stringMsg->GetPackBodyPointer(), stringMsg->GetPackBodySize());
+
+    // Deserialize the transform data
+    // If you want to skip CRC check, call Unpack() without argument.
+    int c = stringMsg->Unpack(1);
+
+    if (c & igtl::MessageHeader::UNPACK_BODY) // if CRC check is OK
+    {
+        std::cerr << "Encoding: " << stringMsg->GetEncoding() << "; "
+                  << "String: " << stringMsg->GetString() << std::endl
+                  << std::endl;
     }
 
     return 1;
